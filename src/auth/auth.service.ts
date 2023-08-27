@@ -7,12 +7,16 @@ import { CustomHttpException } from '../common/exception/custom-http-exception';
 import { authErrors } from './errors';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { UsersEntity } from '../users/users.entity';
+import { RegisterDriverDto } from './dto/register-driver.dto';
+import { DriverService } from '../drivers/drivers.service';
+import { Point } from 'geojson';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UsersService,
     private readonly jwtService: JwtService,
+    private readonly driverService: DriverService,
   ) {}
 
   async register(params: RegisterDto) {
@@ -32,6 +36,36 @@ export class AuthService {
       delete user.password;
       delete user.salt;
       delete user.skipHashPassword;
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async registerUser(params: RegisterDto): Promise<Partial<UsersEntity>> {
+    return this.register(params);
+  }
+
+  async registerDriver(
+    params: RegisterDriverDto,
+  ): Promise<Partial<UsersEntity>> {
+    try {
+      const { email, phone_number, latitude, longitude } = params;
+      let user = await this.userService.userExist(phone_number, email);
+      if (!user) {
+        user = await this.register(params);
+      }
+      const pointObject: Point = {
+        type: 'Point',
+        coordinates: [longitude, latitude],
+      };
+      const driverInstance = this.driverService.driverInstance({
+        availability: false,
+        current_location: pointObject,
+        user_id: user.id,
+      });
+      await this.driverService.saveDriver(driverInstance);
+
       return user;
     } catch (error) {
       throw error;

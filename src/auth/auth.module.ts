@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 import { SessionSerializer } from './session.serializer';
+import { DriversModule } from '../drivers/drivers.module';
 
 @Module({
   controllers: [AuthController],
@@ -23,6 +24,7 @@ import { SessionSerializer } from './session.serializer';
         algorithms: ['HS384'],
       },
     }),
+    DriversModule,
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy, SessionSerializer],
 })
