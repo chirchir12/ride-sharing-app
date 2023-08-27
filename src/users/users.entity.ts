@@ -4,9 +4,12 @@ import {
   Column,
   Entity,
   Index,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+
+import { DriverEntity } from '../drivers/drivers.entity';
 
 @Entity({
   name: 'users',
@@ -45,6 +48,10 @@ export class UsersEntity {
 
   @Column()
   salt: string;
+
+  //foreign key
+  @OneToOne(() => DriverEntity, (entity) => entity.user)
+  driver?: DriverEntity;
 
   @BeforeInsert()
   async hashPasswordBeforeInsert() {
