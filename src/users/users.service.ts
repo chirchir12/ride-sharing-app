@@ -2,11 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { UsersRepository } from './users.repository';
 import { CustomHttpException } from '../common/exception/custom-http-exception';
 import { userErrors } from './errors';
+import { UsersEntity } from './users.entity';
 @Injectable()
 export class UsersService {
   constructor(private readonly repository: UsersRepository) {}
 
-  async getById(id: number) {
+  async getById(id: number): Promise<Partial<UsersEntity>> {
     const user = await this.repository.findOne({
       where: {
         id,
@@ -20,7 +21,7 @@ export class UsersService {
     return user;
   }
 
-  async getByphone(phone: string) {
+  async getByphone(phone: string): Promise<Partial<UsersEntity>> {
     const user = await this.repository.findOne({
       where: {
         phone_number: phone,
@@ -34,17 +35,24 @@ export class UsersService {
     return user;
   }
 
-  async userExist(phone: string, email: string) {
+  async userExist(
+    phone: string,
+    email: string,
+  ): Promise<Partial<UsersEntity> | null> {
     const user = await this.repository.findOne({
-      where: [{ email }, { phone_number: phone }],
+      where: [{ email: email.toLowerCase() }, { phone_number: phone }],
       select: ['id', 'email', 'phone_number', 'name'],
     });
     return user;
   }
 
-  // async create(params) {
-  //   return;
-  // }
+  async userInstance(params: Partial<UsersEntity>): Promise<UsersEntity> {
+    return this.repository.create(params);
+  }
+
+  async create(params: Partial<UsersEntity>): Promise<UsersEntity> {
+    return this.repository.save(params);
+  }
 
   // async update(params) {
   //   return;
