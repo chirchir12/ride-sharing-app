@@ -35,6 +35,19 @@ export class UsersService {
     return user;
   }
 
+  async getByEmail(email: string): Promise<Partial<UsersEntity>> {
+    const user = await this.repository.findOne({
+      where: {
+        email: email.toLowerCase(),
+      },
+    });
+
+    if (!user) {
+      throw new CustomHttpException(userErrors.usernotFound, 404);
+    }
+    return user;
+  }
+
   async userExist(
     phone: string,
     email: string,
