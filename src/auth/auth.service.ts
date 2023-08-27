@@ -59,6 +59,10 @@ export class AuthService {
         type: 'Point',
         coordinates: [longitude, latitude],
       };
+      const driverExist = await this.driverService.driverExist(user.id);
+      if (driverExist) {
+        throw new CustomHttpException(authErrors.driverExist);
+      }
       const driverInstance = this.driverService.driverInstance({
         availability: false,
         current_location: pointObject,
