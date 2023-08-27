@@ -6,7 +6,6 @@ import {
   Post,
   UseInterceptors,
   UseGuards,
-  Get,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
