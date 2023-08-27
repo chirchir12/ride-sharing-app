@@ -35,10 +35,4 @@ export class AuthController {
   async login(@AuthUser() user: UsersEntity): Promise<UsersEntity> {
     return user;
   }
-
-  @Get('/me')
-  @UseGuards(SessionAuthGuard, JWTAuthGuard)
-  me(@AuthUser() user: UsersEntity): UsersEntity {
-    return user;
-  }
 }
