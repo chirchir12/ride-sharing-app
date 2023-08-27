@@ -15,6 +15,7 @@ import { DBConnection } from '../config/interfaces';
           port: config.get<DBConnection>('db').port,
           username: config.get<DBConnection>('db').username,
           password: config.get<DBConnection>('db').password,
+          database: config.get<DBConnection>('db').database,
           entities: ['dist/**/*.entity.js'],
           migrations: ['dist/database/migrations/*.js'],
           extra: {
