@@ -47,6 +47,9 @@ export class AuthService {
       throw new CustomHttpException(authErrors.unAuthorized, 401);
     }
     delete user.password;
+    delete user.hashPassword;
+    delete user.salt;
+    delete user.skipHashPassword;
 
     return user;
   }
