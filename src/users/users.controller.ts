@@ -12,7 +12,7 @@ export class UsersController {
 
   @Get('/profile')
   @UseGuards(SessionAuthGuard, JWTAuthGuard)
-  getProle(@AuthUser() user: UsersEntity): UsersEntity {
+  getProfile(@AuthUser() user: UsersEntity): UsersEntity {
     return user;
   }
 }
