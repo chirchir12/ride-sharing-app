@@ -14,7 +14,9 @@ import { AuthUser } from '../auth/auth-decorator';
 import { UsersEntity } from '../users/users.entity';
 import { UpdateAvailabilityDto } from './dto/update-availability.dto';
 import { UpdateCurrentLocationDto } from './dto/update-current-location.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('drivers')
 @UseGuards(SessionAuthGuard, JWTAuthGuard)
 @Controller('drivers')
 export class DriverController {

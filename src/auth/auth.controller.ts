@@ -14,7 +14,9 @@ import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthUser } from './auth-decorator';
 import { RegisterDriverDto } from './dto/register-driver.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

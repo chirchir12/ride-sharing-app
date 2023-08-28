@@ -4,7 +4,9 @@ import { SessionAuthGuard } from '../auth/guards/session-auth.guard';
 import { JWTAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { AuthUser } from '../auth/auth-decorator';
 import { UsersEntity } from './users.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('users')
 @UseGuards(SessionAuthGuard, JWTAuthGuard)
 @Controller('users')
 export class UsersController {

@@ -20,23 +20,25 @@ import { AcceptRideRequestDto } from './dtos/accept-ride-request.dto';
 import { CancelRideRequestDto } from './dtos/cancel-ride-request.dto';
 import { CompleteRideRequestDto } from './dtos/complete-ride-request.dto';
 import { SearchRidesdDto } from './dtos/search-ride.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @UseGuards(SessionAuthGuard, JWTAuthGuard)
 @Controller()
 export class RideRequestController {
   constructor(private readonly service: RideRequestService) {}
 
+  @ApiTags('users')
   @Post('users/rides/request')
   requestRide(@AuthUser() user: UsersEntity, @Body() params: RideRequestDto) {
     params.user_id = user.id;
     return this.service.requestRide(params);
   }
-
+  @ApiTags('users')
   @Get('users/rides')
   allUserRides(@AuthUser() user: UsersEntity) {
     return this.service.allUserRides(user.id);
   }
-
+  @ApiTags('users')
   @Post('users/rides/cancel')
   @HttpCode(HttpStatus.OK)
   cancelRideRequest(
@@ -46,6 +48,7 @@ export class RideRequestController {
     return this.service.cancelRideRequest(user.id, params.request_id);
   }
 
+  @ApiTags('drivers')
   @Post('drivers/rides/accept')
   @HttpCode(HttpStatus.OK)
   acceptRideRequest(
@@ -55,6 +58,7 @@ export class RideRequestController {
     return this.service.acceptRideRequest(user.id, params.request_id);
   }
 
+  @ApiTags('drivers')
   @Post('drivers/rides/complete')
   @HttpCode(HttpStatus.OK)
   completeRideRequest(
@@ -64,12 +68,14 @@ export class RideRequestController {
     return this.service.completeRideRequest(user.id, params.request_id);
   }
 
+  @ApiTags('drivers')
   @Get('drivers/rides/receive')
   @HttpCode(HttpStatus.OK)
   getPendingRideRequest(@AuthUser() user: UsersEntity) {
     return this.service.getPendingRideRequests(user.id);
   }
 
+  @ApiTags('drivers')
   @Get('drivers/rides')
   allDriverRides(@AuthUser() user: UsersEntity) {
     return this.service.allDriverRides(user.id);
