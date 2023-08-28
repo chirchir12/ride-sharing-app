@@ -4,12 +4,15 @@ import {
   Column,
   Entity,
   Index,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 import { DriverEntity } from '../drivers/drivers.entity';
+import { RideRequestEntity } from '../ride-requests/ride-request.entity';
+import { RidesEntity } from '../ride-requests/rides.entity';
 
 @Entity({
   name: 'users',
@@ -59,6 +62,15 @@ export class UsersEntity {
       await this.hashPassword();
     }
   }
+
+  @OneToMany(() => RideRequestEntity, (entity) => entity.user)
+  ride_requests: RideRequestEntity[];
+
+  @OneToMany(() => RidesEntity, (entity) => entity.user)
+  user_rides: RidesEntity[];
+
+  @OneToMany(() => RidesEntity, (entity) => entity.driver)
+  driver_rides: RidesEntity[];
 
   @BeforeUpdate()
   async hashPasswordBeforeUpdate() {

@@ -4,10 +4,12 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   Point,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { UsersEntity } from '../users/users.entity';
+import { RidesEntity } from './rides.entity';
 
 @Entity({
   name: 'ride_requests',
@@ -56,4 +58,7 @@ export class RideRequestEntity {
     foreignKeyConstraintName: 'FK_ride_reuqests_user_id',
   })
   user: UsersEntity;
+
+  @OneToOne(() => RidesEntity, (entity) => entity.ride_request)
+  ride: RidesEntity;
 }
