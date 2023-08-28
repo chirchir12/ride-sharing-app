@@ -7,7 +7,10 @@ import {
   DestinationLocation,
   PendingRideReqiests,
   PickupLocation,
+  RideRequest,
 } from './interface';
+import { SearchRidesdDto } from './dtos/search-ride.dto';
+import { Pagination } from '../common/pagination/pagination';
 
 @Injectable()
 export class RideRequestRepository extends Repository<RideRequestEntity> {
@@ -34,5 +37,9 @@ export class RideRequestRepository extends Repository<RideRequestEntity> {
     distance_in_meters: number,
   ): Promise<PendingRideReqiests[]> {
     return this.sqlService.getPendingRequests(driver_id, distance_in_meters);
+  }
+
+  allUserRides(params: SearchRidesdDto): Promise<Pagination<RideRequest>> {
+    return;
   }
 }

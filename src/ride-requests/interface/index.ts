@@ -13,6 +13,7 @@ export interface DestinationLocation {
 }
 
 export interface RideRequest {
+  id: number;
   user_id?: number;
 
   pickup_location: PickupLocation;
