@@ -5,10 +5,12 @@ import { DataSource } from 'typeorm';
 import {
   CalculatedDistance,
   DestinationLocation,
+  PendingRideReqiests,
   PickupLocation,
 } from './interface';
 interface queriesInterface {
   calculateDistance: string;
+  getPendingRequests: string;
 }
 
 const path_to_sql_dir = join(__dirname, 'sql');
@@ -33,6 +35,21 @@ export class RideRequestSqlService extends LoadSQL<queriesInterface> {
         pickup.latitude,
         destionation.longitude,
         destionation.latitude,
+      ]);
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
+    }
+  }
+
+  getPendingRequests(
+    driver_id: number,
+    distance_in_meters: number,
+  ): Promise<PendingRideReqiests[]> {
+    try {
+      return this.runSQL(this.queries.getPendingRequests, [
+        driver_id,
+        distance_in_meters,
       ]);
     } catch (error) {
       this.logger.error(error);
