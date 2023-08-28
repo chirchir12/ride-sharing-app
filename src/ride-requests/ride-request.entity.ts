@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   Index,
   JoinColumn,
@@ -7,6 +8,7 @@ import {
   OneToOne,
   Point,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { UsersEntity } from '../users/users.entity';
 import { RidesEntity } from './rides.entity';
@@ -38,6 +40,19 @@ export class RideRequestEntity {
     nullable: true,
   })
   destination_location: Point;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  created_at: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+    onUpdate: 'CURRENT_TIMESTAMP',
+  })
+  updated_at: Date;
 
   @Column({
     type: 'varchar',
