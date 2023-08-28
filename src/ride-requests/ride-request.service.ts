@@ -310,6 +310,10 @@ export class RideRequestService {
       if (rideRequest && rideRequest.status !== 'pending') {
         throw new CustomHttpException(rideRequestErrors.actionNotAllowed);
       }
+
+      if (rideRequest && rideRequest.user_id === driver.user_id) {
+        throw new CustomHttpException(rideRequestErrors.actionNotAllowed);
+      }
       // 1. update driver availability
       driver.availability = false;
       await queryrunner.manager.save(this.driverService.driverInstance(driver));
