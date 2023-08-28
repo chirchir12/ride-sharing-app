@@ -5,6 +5,7 @@ import { RideRequestSqlService } from './rideRequestSql.service';
 import {
   CalculatedDistance,
   DestinationLocation,
+  PendingRideReqiests,
   PickupLocation,
 } from './interface';
 
@@ -26,5 +27,12 @@ export class RideRequestRepository extends Repository<RideRequestEntity> {
       destination,
     );
     return distanceData[0];
+  }
+
+  async getPendingRequests(
+    driver_id: number,
+    distance_in_meters: number,
+  ): Promise<PendingRideReqiests[]> {
+    return this.sqlService.getPendingRequests(driver_id, distance_in_meters);
   }
 }

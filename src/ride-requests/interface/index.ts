@@ -1,3 +1,5 @@
+import { Point } from 'geojson';
+
 export interface PickupLocation {
   latitude: number;
 
@@ -21,5 +23,15 @@ export interface RideRequest {
 }
 
 export interface CalculatedDistance {
+  distance_meters: number;
+}
+
+export interface PendingRideReqiests {
+  pickup_longitude: number;
+  pickup_latitude: number;
+  destination_longitude: number;
+  destination_latitude: number;
+  status: 'pending' | 'accepted' | 'completed' | 'canceled';
+  requested_by: string;
   distance_meters: number;
 }
