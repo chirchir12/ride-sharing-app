@@ -4,6 +4,7 @@ import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import * as connectPgSimple from 'connect-pg-simple';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
 
@@ -46,6 +47,16 @@ export function setup(app: INestApplication): INestApplication {
     credentials: true,
     exposedHeaders: ['Authorization'],
   });
+
+  const options = new DocumentBuilder()
+    .setTitle('Ride Sharing App')
+    .setDescription('The Ride Sharing App API description')
+    .setVersion('1.0')
+
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('api/docs', app, document);
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
