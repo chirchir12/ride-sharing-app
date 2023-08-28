@@ -15,9 +15,10 @@ import { UsersEntity } from '../users/users.entity';
 import { UpdateAvailabilityDto } from './dto/update-availability.dto';
 import { UpdateCurrentLocationDto } from './dto/update-current-location.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { DriverRoleGuard } from '../auth/guards/is-driver.guard';
 
 @ApiTags('drivers')
-@UseGuards(SessionAuthGuard, JWTAuthGuard)
+@UseGuards(SessionAuthGuard, JWTAuthGuard, DriverRoleGuard)
 @Controller('drivers')
 export class DriverController {
   constructor(private readonly service: DriverService) {}

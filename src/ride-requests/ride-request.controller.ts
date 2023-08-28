@@ -21,6 +21,7 @@ import { CancelRideRequestDto } from './dtos/cancel-ride-request.dto';
 import { CompleteRideRequestDto } from './dtos/complete-ride-request.dto';
 import { SearchRidesdDto } from './dtos/search-ride.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { DriverRoleGuard } from '../auth/guards/is-driver.guard';
 
 @UseGuards(SessionAuthGuard, JWTAuthGuard)
 @Controller()
@@ -49,6 +50,7 @@ export class RideRequestController {
   }
 
   @ApiTags('drivers')
+  @UseGuards(DriverRoleGuard)
   @Post('drivers/rides/accept')
   @HttpCode(HttpStatus.OK)
   acceptRideRequest(
@@ -59,6 +61,7 @@ export class RideRequestController {
   }
 
   @ApiTags('drivers')
+  @UseGuards(DriverRoleGuard)
   @Post('drivers/rides/complete')
   @HttpCode(HttpStatus.OK)
   completeRideRequest(
@@ -69,6 +72,7 @@ export class RideRequestController {
   }
 
   @ApiTags('drivers')
+  @UseGuards(DriverRoleGuard)
   @Get('drivers/rides/receive')
   @HttpCode(HttpStatus.OK)
   getPendingRideRequest(@AuthUser() user: UsersEntity) {
@@ -76,6 +80,7 @@ export class RideRequestController {
   }
 
   @ApiTags('drivers')
+  @UseGuards(DriverRoleGuard)
   @Get('drivers/rides')
   allDriverRides(@AuthUser() user: UsersEntity) {
     return this.service.allDriverRides(user.id);
