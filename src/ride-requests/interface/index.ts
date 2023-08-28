@@ -1,10 +1,10 @@
-interface PickupLocation {
+export interface PickupLocation {
   latitude: number;
 
   longitude: number;
 }
 
-interface DestinationLocation {
+export interface DestinationLocation {
   latitude: number;
 
   longitude: number;
@@ -18,4 +18,8 @@ export interface RideRequest {
   destination_location: DestinationLocation;
 
   status: 'pending' | 'accepted' | 'completed' | 'canceled';
+}
+
+export interface CalculatedDistance {
+  distance_meters: number;
 }
