@@ -45,7 +45,7 @@ describe('AuthService', () => {
   });
 
   describe('register', () => {
-    it('should register a user successfully', async () => {
+    it('should register a User successfully', async () => {
       // Arrange
       const registerDto: RegisterDto = {
         email: 'test@example.com',
