@@ -11,8 +11,6 @@ import { DriverEntity } from '../drivers/drivers.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RidesEntity } from './rides.entity';
 import { DataSource, In, Repository } from 'typeorm';
-import { Pagination } from '../common/pagination/pagination';
-import { SearchRidesdDto } from './dtos/search-ride.dto';
 
 @Injectable()
 export class RideRequestService {
