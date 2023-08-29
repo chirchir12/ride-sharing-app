@@ -10,13 +10,13 @@ This repository contains a simplified version of a ride-sharing API built using 
   - [Prerequisites](#prerequisites)
   - [Setup and Installation](#setup-and-installation)
     - [Manual Setup](#manual-setup)
-  - [Description](#description)
-  - [Installation](#installation)
-  - [Running the app](#running-the-app)
-  - [Test](#test)
+      - [Installation](#installation)
+      - [Running the app](#running-the-app)
+      - [Test](#test)
     - [Using Docker Compose](#using-docker-compose)
     - [API Documentation](#api-documentation)
-    - [Pg Admin](#pg-admin) - [NB](#nb)
+    - [Pg Admin](#pg-admin)
+  - [NB](#nb)
   - [License](#license)
 
 ## Features
@@ -63,17 +63,13 @@ Before you begin, ensure you have the following prerequisites:
    - Rename the `.env.example` file to `.env`.
    - Edit the `.env` file and provide your PostgreSQL database credentials.
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+#### Installation
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+#### Running the app
 
 ```bash
 # development
@@ -86,7 +82,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+#### Test
 
 ```bash
 # unit tests
@@ -117,7 +113,7 @@ $ npm run test
 3. use `pgadmin4` in the password field
 4. create a connection once connected and remember to use `db` in the host connection field
 
-###### NB
+## NB
 
 if you encounter issues running with docker, check if you have postgres installed and run `sudo systemctl stop postgres.service` and run `docker-compose up --build`
 
