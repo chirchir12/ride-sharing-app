@@ -14,8 +14,8 @@ This repository contains a simplified version of a ride-sharing API built using 
       - [Running the app](#running-the-app)
       - [Test](#test)
     - [Using Docker Compose](#using-docker-compose)
-    - [API Documentation](#api-documentation)
-    - [Pg Admin](#pg-admin)
+  - [API Documentation](#api-documentation)
+  - [Pg Admin](#pg-admin)
   - [NB](#nb)
   - [License](#license)
 
@@ -101,12 +101,12 @@ $ npm run test
 5. run `docker exec -it <app_id>  sh`
 6. inside container run `npm run migration:run`
 
-### API Documentation
+## API Documentation
 
 1. http://localhost:4003/api/docs#/ OR speficy your port
 2. you can also import postman collection in the root directory of the project to your postman
 
-### Pg Admin
+## Pg Admin
 
 1. please visit http://localhost:5050/
 2. use `admin@admin.com` in the email field
