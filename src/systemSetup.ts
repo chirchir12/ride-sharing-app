@@ -48,15 +48,17 @@ export function setup(app: INestApplication): INestApplication {
     exposedHeaders: ['Authorization'],
   });
 
-  const options = new DocumentBuilder()
-    .setTitle('Ride Sharing App')
-    .setDescription('The Ride Sharing App API description')
-    .setVersion('1.0')
+  if (process.env.NODE_ENV !== 'production') {
+    const options = new DocumentBuilder()
+      .setTitle('Ride Sharing App')
+      .setDescription('The Ride Sharing App API description')
+      .setVersion('1.0')
 
-    .addBearerAuth()
-    .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api/docs', app, document);
+      .addBearerAuth()
+      .build();
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('api/docs', app, document);
+  }
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
