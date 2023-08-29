@@ -58,8 +58,8 @@ Before you begin, ensure you have the following prerequisites:
 
 ### Manual Setup
 
-1. Clone this repository
-   2.Configure the database connection:
+1. Clone this repository.
+2. Configure the database connection:
    - Rename the `.env.example` file to `.env`.
    - Edit the `.env` file and provide your PostgreSQL database credentials.
 
@@ -107,15 +107,14 @@ $ npm run test
 
 ### API Documentation
 
-please visit
-http://localhost:4003/api/docs#/ OR speficy your port
-you can also import postman collection in the root directory of the project to your postman
+1. http://localhost:4003/api/docs#/ OR speficy your port
+2. you can also import postman collection in the root directory of the project to your postman
 
 ### Pg Admin
 
 1. please visit http://localhost:5050/
-2. use admin@admin.com in the email field
-3. use pgadmin4 in the password field
+2. use `admin@admin.com` in the email field
+3. use `pgadmin4` in the password field
 4. create a connection once connected and remember to use `db` in the host connection field
 
 ###### NB
