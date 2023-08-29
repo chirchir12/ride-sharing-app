@@ -261,9 +261,7 @@ export class RideRequestService {
     return driver;
   }
 
-  private rideRequestSerialize(
-    rideRequest: Partial<RideRequestEntity>,
-  ): RideRequest {
+  rideRequestSerialize(rideRequest: Partial<RideRequestEntity>): RideRequest {
     return {
       id: rideRequest.id,
       user_id: rideRequest.user_id,
